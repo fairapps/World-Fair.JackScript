@@ -45,12 +45,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          $FAIRTOOL fair catalog --hub "github.com/World-Fair" --base-repo "JackScript" --catalog-identifier 'app.World-Fair.JackScript' --catalog-name 'World Fair JackScripts' --verbose -o jackscripts.json
+          mkdir pages/
+          $FAIRTOOL fair catalog --hub "github.com/${{ github.repository_owner }}" --base-repo "${{ github.event.repository.name }}" --catalog-identifier 'app.${{ github.repository_owner }}.${{ github.event.repository.name }}' --catalog-name '${{ github.repository_owner }} ${{ github.event.repository.name }}' --verbose -o pages/jackscripts.json
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           #path: '.'
-          path: 'jackscripts.json'
+          path: 'pages'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
