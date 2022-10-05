@@ -5,7 +5,8 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
+  schedule:
+    cron: '0,15,30,45 * * * *'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -46,6 +47,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir pages/
+          # save to catalog to
+          # https://world-fair.github.io/World-Fair.JackScript/jackscripts.json
           $FAIRTOOL fair catalog --hub "github.com/${{ github.repository_owner }}" --base-repo "${{ github.event.repository.name }}" --catalog-identifier 'app.${{ github.repository_owner }}.${{ github.event.repository.name }}' --catalog-name '${{ github.repository_owner }} ${{ github.event.repository.name }}' --verbose -o pages/jackscripts.json
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
