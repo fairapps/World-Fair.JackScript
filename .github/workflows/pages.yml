@@ -37,10 +37,14 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v2
-      - name: Run Fairtool
+      - name: Install Fairtool
         run: |
           brew install fair-ground/tool/$FAIRTOOL
           $FAIRTOOL version
+      - name: Run Fairtool
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
           $FAIRTOOL fair catalog --hub github.com/World-Fair --base-repo JackScript --catalog-identifier 'app.World-Fair.JackScript' --catalog-name 'World Fair JackScripts' --verbose > catalog.json
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
