@@ -1,8 +1,11 @@
-{
-  "name": "Jack Script"
-}
+[
+  {
+    "name": "Jack Script"
+  }
+]
 
-// Prologue metadata above must be valid JSON; body below is JavaScript
+// Prologue above is an array of JSON metadata
+// Body below is JavaScript with imported JackPods
 
 var greetings = "He" + 110 + " Jack!";
 
