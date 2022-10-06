@@ -9,3 +9,6 @@
 
 var greetings = "He" + 110 + " Jack!";
 
+var txt = Text(greetings).fontStyle('headline');
+
+txt;
